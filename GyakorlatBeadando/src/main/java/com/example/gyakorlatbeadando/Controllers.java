@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.security.Principal;
+import java.sql.Date;
 
 @Controller
 public class Controllers {
@@ -22,8 +26,10 @@ public class Controllers {
         return "user";
     }
 
+    @Autowired private KapcsolatRepository kapcsolatRepository;
     @GetMapping("/admin/home")
-    public String admin() {
+    public String admin(Model model) {
+        model.addAttribute("kapcsolat", kapcsolatRepository.findAllBackwards());
         return "admin";
 
     }
@@ -65,8 +71,19 @@ public class Controllers {
 
 
     @GetMapping("/feedback")
-    public String feedback() {
+    public String feedback(Model model) {
+        model.addAttribute("kapcsolat", new Kapcsolat());
         return "feedback";
+    }
+
+
+    @PostMapping("/feedback_process")
+    public String feedbackProcess(@ModelAttribute Kapcsolat kapcsolat, Model model) {
+        kapcsolat.setDate(new Date(System.currentTimeMillis()));
+        kapcsolatRepository.save(kapcsolat);
+        model.addAttribute("uzenet", kapcsolat.getUzenet());
+        model.addAttribute("kuldo", kapcsolat.getKuldo());
+        return "feedbacksuccess";
     }
 }
 

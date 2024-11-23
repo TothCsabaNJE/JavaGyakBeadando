@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #feedbackText{
+            width: 800px;
+            height: 600px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="menu"></div>
-<form action="post">
-    <input></input>
+<form action="#" th:action="@{/feedback_process}" th:object="${kapcsolat}" method="post">
+    <p><input type="text" required th:field="*{kuldo}" placeholder="Küldő neve"></p>
+    <p><input type="text" required id="feedbackText" th:field="*{uzenet}" placeholder="Írja ide az üzenetét az Admin-nak"></input></p>
+    <p><input type="submit" value="Küldés"></p>
 </form>
 </body>
 </html>

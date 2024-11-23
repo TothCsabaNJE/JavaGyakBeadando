@@ -7,5 +7,13 @@
 <body>
 <div th:insert="menu"></div>
 <h1>Csak az Admin láthatja ezt az oldalt</h1>
+<table>
+  <tr th:each="data: ${kapcsolat}">
+    <td th:text="${data.id}"></td>
+    <td th:text="${data.kuldo}"></td>
+    <td th:text="${data.date}"></td>
+    <td th:text="${data.uzenet}"></td>
+  </tr>
+</table>
 </body>
 </html>

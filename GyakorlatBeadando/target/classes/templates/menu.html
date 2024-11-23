@@ -18,6 +18,6 @@
 </span>
     </div>
     <div sec:authorize="isAuthenticated()">
-        <h3>Welcome <span sec:authentication="principal.username">User</span></h3>
+        <h3>Aktív felhasználó: <span sec:authentication="principal.username">User</span></h3>
     </div>
 </div>
