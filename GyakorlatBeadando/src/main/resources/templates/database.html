@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<table>
+    <thead>
+        <tr>
+            <th>Név</th>
+            <th>Típus</th>
+            <th>Díjazott</th>
+            <th>Ár</th>
+            <th>Tartalom</th>
+        </tr>
+    </thead>
+    <tr th:each="data: ${suti}">
+        <td th:text="${data.nev}"></td>
+        <td th:text="${data.tipus}"></td>
+        <td th:text="${data.dijazott}"></td>
+        <td>
+            <div th:each="subdata: ${ar}" th:if="${subdata.sutiid==data.id}">
+                <span th:text="${subdata.ertek}+':'"></span>
+                <span th:text="${subdata.egyseg}"></span>
+            </div>
+        </td>
+        <td th:each="subdata: ${tartalom}" th:if="${subdata.sutiid==data.id}">
+            <p th:text="${subdata.mentes}"></p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
