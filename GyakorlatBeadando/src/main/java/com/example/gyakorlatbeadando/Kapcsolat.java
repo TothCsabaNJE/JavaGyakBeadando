@@ -9,10 +9,16 @@ import java.sql.Date;
 @Table(name = "feedback")
 public class Kapcsolat {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 1, max = 50)
     private String kuldo;
+    @NotNull
     private Date date;
+    @NotNull
+    @Size(min = 1, max = 500)
     private String uzenet;
 
     public Long getId() {
