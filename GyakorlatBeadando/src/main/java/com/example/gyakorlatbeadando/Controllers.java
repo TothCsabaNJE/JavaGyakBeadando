@@ -78,7 +78,10 @@ public class Controllers {
 
 
     @PostMapping("/feedback_process")
-    public String feedbackProcess(@ModelAttribute Kapcsolat kapcsolat, Model model) {
+    public String feedbackProcess(@Valid @ModelAttribute Kapcsolat kapcsolat, Model model) {
+        if(bindingResult.hasErrors()){
+            return "feedback";
+        }
         kapcsolat.setDate(new Date(System.currentTimeMillis()));
         kapcsolatRepository.save(kapcsolat);
         model.addAttribute("uzenet", kapcsolat.getUzenet());
