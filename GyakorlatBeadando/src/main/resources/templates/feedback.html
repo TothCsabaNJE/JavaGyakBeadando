@@ -15,9 +15,11 @@
 <body>
 <div th:insert="menu"></div>
 <form action="#" th:action="@{/feedback_process}" th:object="${kapcsolat}" method="post">
-    <p><input type="text" required th:field="*{kuldo}" placeholder="Küldő neve"></p>
-    <p><input type="text" required id="feedbackText" th:field="*{uzenet}" placeholder="Írja ide az üzenetét az Admin-nak"></input></p>
-    <p><input type="submit" value="Küldés"></p>
+      <p><input type="text" required th:field="*{kuldo}" placeholder="Küldő neve"></p>
+      <p th:if="${#fields.hasErrors('kuldo')}" th:errors="*{kuldo}"></p>
+      <p><input type="text" required id="feedbackText" th:field="*{uzenet}" placeholder="Írja ide az üzenetét az Admin-nak"></input></p>
+      <p th:if="${#fields.hasErrors('uzenet')}" th:errors="*{uzenet}"></p>
+      <p><input type="submit" value="Küldés"></p>
 </form>
 </body>
 </html>
